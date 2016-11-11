@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<title>Pebble for Beeminder Configuration</title>
+<link href="css/slate.min.css" rel="stylesheet" type="text/css">
+<script src="js/slate.min.js"></script>
+</head>
+
+<body>
+
+<h1>Pebble for Beeminder Configuration</h1>
+<script>
+  function getParameterByName(name, url) {
+    if (!url) {
+      url = window.location.href;
+    }
+    name = name.replace(/[\[\]]/g, "\\$&");
+    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, " "));
+}
+
+var access_token = getParameterByName('access_token');
+var username = getParameterByName('username');
+
+document.write('<div class="item-container"><div class="item-container-header">Beeminder Username:</div><div class="item-container-content"><label class="item"><div class="item-input-wrapper"><input type="text" class="item-input" id="username" value="' + username + '" readonly></div></label></div></div>');
+</script>
+<div class="item-container">
+	<div class="item-container-header">
+		Select one of your Beeminder goals:</div>
+	<div class="item-container-content">
+		<script>
+var xhrRequest = function (url, type, callback) {
+  var xhr = new XMLHttpRequest();
+  xhr.onload = function () {
+    callback(this.responseText);
+  };
+  xhr.open(type, url);
+  xhr.send();
+};
+
+var goal = [];
+
+var url = "https://www.beeminder.com/api/v1/users/me.json?access_token=" + access_token;
+
+xhrRequest(url, 'GET', 
+	
+	function(responseText) {
+      var json = JSON.parse(responseText);
+	  
+	  for (var i = 0; i < jsonData.goals.length; i++) {
+			goal = jsonData.goals[i];
+		}
+      }
+	  );
+
+if(goal.length == 0)
+	document.write('<div class="item">Create a goal first.</div>');
+else
+	for (var i = 0; i < goal.length; i++) {
+	document.write('<label class="item">' + goal[i] + '<input type="radio" class="item-radio" name="goal" value="' + goal[i] + '"></label>');
+	}
+
+</script>
+	</div>
+</div>
+<div class="item-container">
+	<div class="item-container-header">
+		Select one of the Pebble heath metric values to track:</div>
+	<div class="item-container-content">
+		<label class="item">Step Count<input class="item-radio" name="metric" type="radio" value="StepCount"></label>
+		<label class="item">Active Time (minutes)<input class="item-radio" name="metric" type="radio" value="ActiveSeconds"></label>
+		<label class="item">Sleep Time (minutes)<input class="item-radio" name="metric" type="radio" value="SleepSeconds"></label>
+		<label class="item">Distance Walked (Meters)<input class="item-radio" name="metric" type="radio" value="WalkedDistance"></label>
+		<label class="item">Calories Burned (kcal)<input class="item-radio" name="metric" type="radio" value="ActiveKCalories"></label>
+	</div>
+</div>
+<div class="item-container">
+	<div class="button-container">
+		<input id="submit_button" class="item-button" type="button" value="Save"><br>
+	</div>
+</div>
+<script>
+  // Get a handle to the button's HTML element
+  var submitButton = document.getElementById('submit_button');
+
+  // Add a 'click' listener
+  submitButton.addEventListener('click', function() {
+    // Get the config data from the UI elements
+    var agoal = document.getElementsByName('goal');
+	var j = 0;
+	for (var i = 0;i < agoal.length; i++) {
+		if(agoal[i].checked) {
+			j = i;
+			break;
+		}
+	}
+	if(i != j)   {
+		alert("Please select a goal.");
+	}
+	else
+	{
+	var ametric = document.getElementsByName('metric');
+	var k = 0;
+	for (var i = 0;i < ametric.length; i++) {
+		if(ametric[i].checked) {
+			k = i;
+			break;
+		}
+	}
+	if(i != k)   {
+		alert("Please select a health metric value to track.");
+	}
+	else
+	{
+    // Make a data object to be sent, coercing value types to integers
+    var options = {
+      'access_token': access_token,
+	  'username': username,
+	  'goal': agoal[j].value,
+	  'metric': ametric[k].value
+    };
+
+    // Determine the correct return URL (emulator vs real watch)
+    function getQueryParam(variable, defaultValue) {
+      var query = location.search.substring(1);
+      var vars = query.split('&');
+      for (var i = 0; i < vars.length; i++) {
+        var pair = vars[i].split('=');
+        if (pair[0] === variable) {
+          return decodeURIComponent(pair[1]);
+        }
+      }
+      return defaultValue || false;
+    }
+    var return_to = getQueryParam('return_to', 'pebblejs://close#');
+
+    // Encode and send the data when the page closes
+    document.location = return_to + encodeURIComponent(JSON.stringify(options));
+	}
+	}
+  });
+</script>
+<h2>Create a new Beeminder goal</h2>
+<div class="item-container">
+	<div class="item-container-content">
+		<div class="item">
+			Select the new goal after creating it.</div>
+	</div>
+</div>
+<div class="item-container">
+	<div class="item-container-header">
+		Short Goal Name:</div>
+	<div class="item-container-content">
+		<label class="item">
+		<div class="item-input-wrapper">
+			<input id="slug" class="item-input" required="" type="text" value="pebble">
+		</div>
+		</label></div>
+</div>
+<div class="item-container">
+	<div class="item-container-header">
+		Long Goal Name:</div>
+	<div class="item-container-content">
+		<label class="item">
+		<div class="item-input-wrapper">
+			<input id="title" class="item-input" type="text" value="Pebble Step Count">
+		</div>
+		</label></div>
+</div>
+<div class="item-container">
+	<div class="item-container-header">
+		Pledge Value per Day:</div>
+	<div class="item-container-content">
+		<label class="item">
+		<div class="item-input-wrapper">
+			<input id="rate" class="item-input" required="" type="number" value="10000">
+		</div>
+		</label></div>
+	<div class="item-container-footer">
+		E.g Number of steps per day.</div>
+</div>
+<div class="item-container">
+	<div class="button-container">
+		<input id="create_button" class="item-button" type="button" value="Create">
+	</div>
+</div>
+<script>
+  // Get a handle to the button's HTML element
+  var createButton = document.getElementById('create_button');
+
+  // Add a 'click' listener
+  createButton.addEventListener('click', function() {
+    // Get the config data from the UI elements
+    var slug = document.getElementById('slug').value;
+    var title = document.getElementById('title').value;
+    var rate = parseInt(document.getElementById('rate').value, 10);
+	
+	var decade = 60 * 60 * 24 * 365 * 10;
+	
+	var d = new Date();
+	var t = Math.floor(d.getTime() / 1000);
+	
+	var goaldate = t + decade;
+	
+	var url = "https://www.beeminder.com/api/v1/users/me/goals.json?access_token=" + access_token + "&slug=" + slug + "&title=" + title + "&goal_type=hustler&goaldate=" + goaldate + "&goalval=null&rate=" + rate;
+
+	xhrRequest(url, 'POST', function(responseText) {});
+
+    location.reload();
+  });
+</script>
+
+</body>
+
+</html>

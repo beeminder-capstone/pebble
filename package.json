@@ -1,0 +1,49 @@
+{
+    "author": "PSU CS Capstone",
+    "dependencies": {},
+    "keywords": [],
+    "name": "beeminder",
+    "pebble": {
+        "capabilities": [
+            "configurable",
+            "health"
+        ],
+        "displayName": "Beeminder",
+        "enableMultiJS": true,
+        "messageKeys": [
+            "access_token",
+            "username",
+            "goal",
+            "metric",
+            "rate",
+            "roadstatuscolor",
+            "limsum",
+            "JSReady"
+        ],
+        "projectType": "native",
+        "resources": {
+            "media": [
+                {
+                    "file": "images/Beeminder Logo.png",
+                    "menuIcon": true,
+                    "name": "Beeminder_Logo",
+                    "targetPlatforms": null,
+                    "type": "bitmap"
+                }
+            ]
+        },
+        "sdkVersion": "3",
+        "targetPlatforms": [
+            "aplite",
+            "basalt",
+            "chalk",
+            "diorite",
+            "emery"
+        ],
+        "uuid": "9b5aa5bf-caf1-41ad-ae3d-34d7018cf530",
+        "watchapp": {
+            "watchface": false
+        }
+    },
+    "version": "1.0.0"
+}
