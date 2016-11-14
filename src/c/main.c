@@ -48,7 +48,6 @@ static goal goals;
 // Initialize the default settings
 static void default_settings() {
   settings.config = false;
-  //settings.config = true;
   strcpy(settings.access_token, "");
   strcpy(settings.username, "");
   strcpy(settings.goal, "");
@@ -242,6 +241,8 @@ static void inbox_received_handler(DictionaryIterator *iter, void *context) {
   if(ready_tuple) {
     // PebbleKit JS is ready! Safe to send messages
     s_js_ready = true;
+    
+    tick_handler(NULL, MINUTE_UNIT);
   }
   if (aaccess_token && ausername && agoal && ametric) {
     strcpy(settings.access_token, aaccess_token->value->cstring);
@@ -291,17 +292,20 @@ static void inbox_received_handler(DictionaryIterator *iter, void *context) {
     }
     
     #ifdef PBL_COLOR
-    if(strcmp(aroadstatuscolor->value->cstring, "Blue") == 0){
+    if(strcmp(aroadstatuscolor->value->cstring, "blue") == 0){
       step_color = GColorBlue;
     }
-    else if(strcmp(aroadstatuscolor->value->cstring, "Green") == 0){
+    else if(strcmp(aroadstatuscolor->value->cstring, "green") == 0){
       step_color = GColorGreen;
     }
-    else if(strcmp(aroadstatuscolor->value->cstring, "Orange") == 0){
+    else if(strcmp(aroadstatuscolor->value->cstring, "orange") == 0){
       step_color = GColorOrange;
     }
-    else if(strcmp(aroadstatuscolor->value->cstring, "Red") == 0){
+    else if(strcmp(aroadstatuscolor->value->cstring, "red") == 0){
       step_color = GColorRed;
+    }
+    else{
+      step_color = GColorWhite;
     }
     #endif
     

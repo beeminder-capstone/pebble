@@ -11,8 +11,8 @@ This watchapp automatically gets Pebble Health data from your Pebble Smartwatch 
 The watchapp automatically opens to send the data to Beeminder and you will receive a message when it is successful. Otherwise, it can store up to two weeks (14 days) of data in case your phone is off or you do not have an internet connection.
 
 The watchapp displays:
-* The current value of your selected Pebble Health metric with respect to the rate (per day) of your selected Beeminder goal
-* The summary of what you need to do reach your goal
+* The current value of your selected Pebble Health metric with respect to the rate (per day) of your selected Beeminder goal.
+* The summary of what you need to do reach your goal.
 * Your road status color for the value/rate above (on [Pebble's with a color screen](https://developer.pebble.com/guides/tools-and-resources/hardware-information/)).
 
 The configuration page will not work until it is uploaded to Beeminder's server, because Beeminder's API does not include the "Access-Control-Allow-Origin" header and thus cannot be accessed from a webpage using JavaScript.
