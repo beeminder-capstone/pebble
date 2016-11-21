@@ -47,16 +47,26 @@ var goal = [];
 
 var url = "https://www.beeminder.com/api/v1/users/me.json?access_token=" + access_token;
 
+var ready = false;
+
 xhrRequest(url, 'GET', 
-	
 	function(responseText) {
       var json = JSON.parse(responseText);
 	  
-	  for (var i = 0; i < jsonData.goals.length; i++) {
-			goal = jsonData.goals[i];
+	  var errors = json.errors;
+      
+	  if(errors)
+		alert('An error occured getting goals: ' + errors.message + '.');
+	  else
+	    for (var i = 0; i < json.goals.length; i++) {
+			goal[i] = json.goals[i];
 		}
-      }
-	  );
+		
+	  ready = true;
+    }
+);
+
+while(!ready){}
 
 if(goal.length == 0)
 	document.write('<div class="item">Create a goal first.</div>');
@@ -209,7 +219,14 @@ else
 	
 	var url = "https://www.beeminder.com/api/v1/users/me/goals.json?access_token=" + access_token + "&slug=" + slug + "&title=" + title + "&goal_type=hustler&goaldate=" + goaldate + "&goalval=null&rate=" + rate;
 
-	xhrRequest(url, 'POST', function(responseText) {});
+	xhrRequest(url, 'POST', function(responseText) {
+		var json = JSON.parse(responseText);
+		
+		var errors = json.errors;
+      
+		if(errors)
+			alert('An error occured creating goal ' + slug + ': ' + errors.message + '.');
+	});
 
     location.reload();
   });

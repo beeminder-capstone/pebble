@@ -87,7 +87,7 @@ function postgoal(access_token, goal, timestamp, value, datetime) {
       var body;
       
       if(errors)
-        body = 'An error occured adding a datapoint to goal ' + goal + ': ' + errors + '.';
+        body = 'An error occured adding a datapoint to goal ' + goal + ': ' + errors.message + '.';
       else
         body = 'A datapoint was added to goal ' + goal + ' with value ' + value + ' for ' + datetime + '.';
       
@@ -128,7 +128,7 @@ Pebble.addEventListener('appmessage',
       getgoal(access_token, goal);
     }
     
-    if(dict[2] && dict[3] && dict[4] && dict[5]&& dict[6]) {
+    if(dict[2] && dict[3] && dict[4] && dict[5] && dict[6]) {
       // The RequestData key is present, read the value
       access_token = dict[2];
       goal = dict[3];

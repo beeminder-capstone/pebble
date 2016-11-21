@@ -139,9 +139,9 @@ static void number(int number, char * buffer){
   int hundreds = number % 1000;
 
   if(thousands > 0) {
-    snprintf(buffer, sizeof(buffer), "%d,%03d", thousands, hundreds);
+    snprintf(buffer, 16, "%d,%03d", thousands, hundreds);
   } else {
-    snprintf(buffer, sizeof(buffer), "%d", hundreds);
+    snprintf(buffer, 16, "%d", hundreds);
   }
 }
 
