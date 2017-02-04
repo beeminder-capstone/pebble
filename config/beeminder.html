@@ -184,7 +184,7 @@ else
 </div>
 <div class="item-container">
 	<div class="item-container-header">
-		Pledge Value per Day:</div>
+		Pledge Value:</div>
 	<div class="item-container-content">
 		<label class="item">
 		<div class="item-input-wrapper">
@@ -192,7 +192,36 @@ else
 		</div>
 		</label></div>
 	<div class="item-container-footer">
-		E.g Number of steps per day.</div>
+		E.g <strong>Number</strong> of steps per day.</div>
+</div>
+<div class="item-container">
+	<div class="item-container-header">
+		Pledge Units:</div>
+	<div class="item-container-content">
+		<label class="item">
+		<div class="item-input-wrapper">
+			<input id="gunits" class="item-input" required="" type="text" value="steps">
+		</div>
+		</label></div>
+	<div class="item-container-footer">
+		E.g Number of <strong>steps</strong> per day.</div>
+</div>
+<div class="item-container">
+	<div class="item-container-header">
+		Select one of the Pledge Rates:</div>
+	<div class="item-container-content">
+		<label class="item">
+		Select a Pledge Rate
+		<select id="runits" dir='rtl' class="item-select">
+			<option class="item-select-option" value="y">yearly</option>
+			<option class="item-select-option" value="m">monthly</option>
+			<option class="item-select-option" value="w">weekly</option>
+			<option class="item-select-option" value="d" selected>daily</option>
+			<option class="item-select-option" value="h">hourly</option>
+		</select>
+    </label></div>
+	<div class="item-container-footer">
+		E.g Number of steps <strong>per day</strong>.</div>
 </div>
 <div class="item-container">
 	<div class="button-container">
@@ -209,6 +238,8 @@ else
     var slug = document.getElementById('slug').value;
     var title = document.getElementById('title').value;
     var rate = parseInt(document.getElementById('rate').value, 10);
+	var gunits = document.getElementById('gunits').value;
+	var runits = document.getElementById('runits').value;
 	
 	var decade = 60 * 60 * 24 * 365 * 10;
 	
@@ -217,7 +248,7 @@ else
 	
 	var goaldate = t + decade;
 	
-	var url = "https://www.beeminder.com/api/v1/users/me/goals.json?access_token=" + access_token + "&slug=" + slug + "&title=" + title + "&goal_type=hustler&goaldate=" + goaldate + "&goalval=null&rate=" + rate;
+	var url = "https://www.beeminder.com/api/v1/users/me/goals.json?access_token=" + access_token + "&slug=" + slug + "&title=" + title + "&goal_type=hustler&goaldate=" + goaldate + "&goalval=null&rate=" + rate + "&gunits=" + gunits + "&runits=" + runits;
 
 	xhrRequest(url, 'POST', function(responseText) {
 		var json = JSON.parse(responseText);
