@@ -5,7 +5,6 @@
 <meta charset="UTF-8">
 <title>Pebble for Beeminder Configuration</title>
 <link href="css/slate.min.css" rel="stylesheet" type="text/css">
-<script src="js/slate.min.js"></script>
 </head>
 
 <body>
@@ -32,22 +31,35 @@ document.write('<div class="item-container"><div class="item-container-header">B
 <div class="item-container">
 	<div class="item-container-header">
 		Select one of your Beeminder goals:</div>
-	<div class="item-container-content">
+	<div class="item-container-content" id="goals">
 		<script>
 var xhrRequest = function (url, type, callback) {
+  return new Promise(function (resolve, reject) {
   var xhr = new XMLHttpRequest();
   xhr.onload = function () {
     callback(this.responseText);
+	resolve();
   };
   xhr.open(type, url);
   xhr.send();
+  });
 };
+
+function loadScript(location) {
+	var js = document.getElementById("Script");
+	if(js !== null) {
+		document.body.removeChild(js);
+	}
+
+	js = document.createElement("script");
+	js.src = location;
+	js.id = "Script";
+	document.body.appendChild(js);
+}
 
 var goal = [];
 
 var url = "https://www.beeminder.com/api/v1/users/me.json?access_token=" + access_token;
-
-var ready = false;
 
 xhrRequest(url, 'GET', 
 	function(responseText) {
@@ -61,19 +73,23 @@ xhrRequest(url, 'GET',
 	    for (var i = 0; i < json.goals.length; i++) {
 			goal[i] = json.goals[i];
 		}
-		
-	  ready = true;
     }
-);
-
-while(!ready){}
-
-if(goal.length == 0)
-	document.write('<div class="item">Create a goal first.</div>');
-else
-	for (var i = 0; i < goal.length; i++) {
-	document.write('<label class="item">' + goal[i] + '<input type="radio" class="item-radio" name="goal" value="' + goal[i] + '"></label>');
+).then(() => {
+	if(goal.length == 0)
+		document.getElementById("goals").innerHTML = '<div class="item">Create a goal first.</div>';
+	else
+	{
+		var code = '';
+		
+		for (var i = 0; i < goal.length; i++) {
+		code += '<label class="item">' + goal[i] + '<input type="radio" class="item-radio" name="goal" value="' + goal[i] + '"></label>';
+		}
+		
+		document.getElementById("goals").innerHTML = code;
 	}
+	
+	loadScript("js/slate.min.js");
+});
 
 </script>
 	</div>

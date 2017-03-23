@@ -15,8 +15,6 @@ The watchapp displays:
 * The summary of what you need to do reach your goal.
 * Your road status color for the value/rate above (on [Pebble's with a color screen](https://developer.pebble.com/guides/tools-and-resources/hardware-information/)).
 
-The configuration page will not work until it is uploaded to Beeminder's server, because Beeminder's API does not include the "Access-Control-Allow-Origin" header and thus cannot be accessed from a webpage using JavaScript.
-
 ## Links
 * [https://www.beeminder.com/apps/authorize?client_id=b4t29518iw7a2weh97wt5wcbj&redirect_uri=https://web.cecs.pdx.edu/~tdulcet/beeminder.html&response_type=token](https://www.beeminder.com/apps/authorize?client_id=b4t29518iw7a2weh97wt5wcbj&redirect_uri=https://web.cecs.pdx.edu/~tdulcet/beeminder.html&response_type=token)
 * [https://github.com/beeminder/pebblebee](https://github.com/beeminder/pebblebee)

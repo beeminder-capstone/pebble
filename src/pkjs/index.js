@@ -1,5 +1,5 @@
 Pebble.addEventListener('showConfiguration', function() {
-  var url = 'https://www.beeminder.com/apps/authorize?client_id=b4t29518iw7a2weh97wt5wcbj&redirect_uri=https://web.cecs.pdx.edu/~tdulcet/beeminder.html&response_type=token';
+  var url = 'https://www.beeminder.com/apps/authorize?client_id=b4t29518iw7a2weh97wt5wcbj&redirect_uri=https://www.beeminder.com/pebble/beeminder.html&response_type=token';
 
   Pebble.openURL(url);
 });
