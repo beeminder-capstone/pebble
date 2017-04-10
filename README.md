@@ -1,6 +1,12 @@
 # Pebble
 [Beeminder](https://www.beeminder.com/) Watchapp for [Pebble](https://www.pebble.com/)
 
+Copyright © 2017 The [PSU](https://www.pdx.edu/) [CS](https://www.pdx.edu/computer-science/) Beeminder [Capstone](http://wiki.cs.pdx.edu/capstone/fall_2016/fall_2016.html) Team
+
+Maintained by: [Teal Dulcet](https://github.com/tdulcet)
+
+Made by: Teal Dulcet
+
 This watchapp automatically gets Pebble Health data from your Pebble Smartwatch every night at 11:59PM and adds it to one of your Beeminder Goals. It works with these Pebble Health metrics:
 * Step Count
 * Active Time (minutes)
@@ -16,7 +22,7 @@ The watchapp displays:
 * Your road status color for the value/rate above (on [Pebble's with a color screen](https://developer.pebble.com/guides/tools-and-resources/hardware-information/)).
 
 ## Links
-* [https://www.beeminder.com/apps/authorize?client_id=b4t29518iw7a2weh97wt5wcbj&redirect_uri=https://web.cecs.pdx.edu/~tdulcet/beeminder.html&response_type=token](https://www.beeminder.com/apps/authorize?client_id=b4t29518iw7a2weh97wt5wcbj&redirect_uri=https://web.cecs.pdx.edu/~tdulcet/beeminder.html&response_type=token)
+* [https://www.beeminder.com/apps/authorize?client_id=b4t29518iw7a2weh97wt5wcbj&redirect_uri=https://www.beeminder.com/pebble/beeminder.html&response_type=token](https://www.beeminder.com/apps/authorize?client_id=b4t29518iw7a2weh97wt5wcbj&redirect_uri=https://www.beeminder.com/pebble/beeminder.html&response_type=token)
 * [https://github.com/beeminder/pebblebee](https://github.com/beeminder/pebblebee)
 * [https://developer.pebble.com/](https://developer.pebble.com/)
 * [https://developer.pebble.com/guides/events-and-services/health/](https://developer.pebble.com/guides/events-and-services/health/)
