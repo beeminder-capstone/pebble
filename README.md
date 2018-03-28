@@ -3,9 +3,7 @@
 
 Copyright © 2017 The [PSU](https://www.pdx.edu/) [CS](https://www.pdx.edu/computer-science/) Beeminder [Capstone](http://wiki.cs.pdx.edu/capstone/fall_2016/fall_2016.html) Team
 
-Maintained by: [Teal Dulcet](https://github.com/tdulcet)
-
-Made by: Teal Dulcet
+Made and maintained by: [Teal Dulcet](https://github.com/tdulcet)
 
 This watchapp automatically gets Pebble Health data from your Pebble Smartwatch every night at 11:59PM and adds it to one of your Beeminder Goals. It works with these Pebble Health metrics:
 * Step Count
